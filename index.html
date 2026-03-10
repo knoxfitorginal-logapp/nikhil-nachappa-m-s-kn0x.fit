@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KN0X.FIT Interactive Diet & Workout Plan</title>
+    <!-- Chosen Palette: Red, Black, & White (Brand Theme) -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Very light gray/white background */
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: #dc2626; /* Red-600 */
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.5);
+        }
+        
+        /* Mobile Tab styling */
+        .mobile-tab.active {
+            border-bottom: 3px solid #dc2626;
+            color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        /* Hover effect for non-active links */
+        .nav-link:not(.active):hover {
+            background-color: #e5e7eb; /* Gray-200 (Light Grey) */
+            color: #b91c1c; /* Red-700 text on hover */
+        }
+        .nav-link:active, .mobile-menu-toggle:active, .card-hover:active, .tap-effect:active {
+            transform: scale(0.97);
+        }
+        .content-fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .collapsible-content.expanded {
+            max-height: 1000px; /* Increased to ensure content fits */
+        }
+        .collapsible-header i {
+            transition: transform 0.3s ease-in-out;
+        }
+        .collapsible-header.expanded i {
+            transform: rotate(180deg);
+        }
+        
+        /* Custom scrollbar for sidebar - Updated for Light Theme */
+        aside::-webkit-scrollbar {
+            width: 6px;
+        }
+        aside::-webkit-scrollbar-track {
+            background: #e5e7eb; /* Gray-200 */
+        }
+        aside::-webkit-scrollbar-thumb {
+            background: #9ca3af; /* Gray-400 */
+            border-radius: 3px;
+        }
+        aside::-webkit-scrollbar-thumb:hover {
+            background: #dc2626; 
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased pb-safe">
+
+    <!-- Unified Mobile Header & Nav (Sticky & Distinct) -->
+    <header class="lg:hidden sticky top-0 z-50 w-full flex flex-col bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div id="mobile-header-bar" class="px-3 flex justify-between items-center w-full min-h-[60px]">
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle text-gray-900 text-2xl active:scale-95 transition-transform p-2 rounded-lg hover:bg-gray-100/50">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="https://www.kn0x.fit/" target="_blank" class="flex items-center py-1">
+                <img src="./src/assets/final_logo-removebg-preview (1).png" alt="KN0X.FIT Logo" class="h-14 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="hidden text-xl font-black text-gray-900 italic tracking-tighter uppercase"><span class="text-red-600">KN0X</span>.FIT</div>
+            </a>
+            <div class="w-10"></div> <!-- Spacer for centering -->
+        </div>
+
+        <!-- Mobile Horizontal Scroll Navigation -->
+        <div class="w-full border-t border-gray-100 overflow-x-auto no-scrollbar flex items-center px-1 h-12 snap-x snap-mandatory">
+            <button data-view="dashboard" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Dashboard</button>
+            <button data-view="workout" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Workout</button>
+            <button data-view="week1" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Week 1</button>
+            <button data-view="week2" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Week 2</button>
+            <button data-view="week3" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Week 3</button>
+            <button data-view="week4" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Week 4</button>
+            <button data-view="keyNotes" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Notes</button>
+            <button data-view="explore" class="mobile-tab snap-start flex-shrink-0 px-4 h-full flex items-center text-sm font-bold text-gray-500 whitespace-nowrap transition-colors">Explore</button>
+        </div>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="lg:hidden fixed inset-0 bg-black/60 z-40 hidden transition-opacity backdrop-blur-sm"></div>
+
+    <!-- Layout Container -->
+    <div class="relative min-h-screen lg:flex">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="bg-gray-100 w-72 shadow-2xl fixed top-0 left-0 h-full z-50 transform -translate-x-full transition-transform lg:translate-x-0 lg:relative lg:flex-shrink-0 border-r border-gray-200 overflow-y-auto flex flex-col duration-300 ease-out">
+            <!-- Logo Space -->
+            <div class="py-4 flex items-center justify-center border-b border-gray-200 bg-white sticky top-0 z-10 min-h-[6rem]">
+                <a href="https://www.kn0x.fit/" target="_blank" class="contents">
+                    <img src="./src/assets/final_logo-removebg-preview (1).png" alt="KN0X.FIT Logo" class="h-20 md:h-24 w-auto drop-shadow-lg transform hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<h1 class=\'text-2xl font-black text-gray-900 italic tracking-tighter uppercase\'><span class=\'text-red-600\'>KN0X</span>.FIT</h1>');">
+                </a>
+                <!-- Close Button for Mobile -->
+                <button id="sidebar-close" class="lg:hidden absolute top-4 right-4 text-gray-500 hover:text-red-600 p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-4 lg:p-6 flex-1">
+                <nav id="navigation" class="space-y-2">
+                    <p class="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 mt-2">Menu</p>
+                    <a href="#" data-view="dashboard" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-gauge-high w-6 text-center text-lg"></i> Dashboard
+                    </a>
+                    
+                    <p class="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mt-8 mb-3">Training</p>
+                    <a href="#" data-view="workout" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-dumbbell w-6 text-center text-lg"></i> Workout Plan
+                    </a>
+
+                    <p class="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mt-8 mb-3">Diet Plan</p>
+                    <a href="#" data-view="week1" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-calendar-day w-6 text-center text-lg"></i> Week 1
+                    </a>
+                    <a href="#" data-view="week2" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-calendar-week w-6 text-center text-lg"></i> Week 2
+                    </a>
+                    <a href="#" data-view="week3" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-calendar-alt w-6 text-center text-lg"></i> Week 3
+                    </a>
+                    <a href="#" data-view="week4" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-calendar w-6 text-center text-lg"></i> Week 4
+                    </a>
+                    
+                    <p class="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mt-8 mb-3">Resources</p>
+                    <a href="#" data-view="keyNotes" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-clipboard-list w-6 text-center text-lg"></i> Key Notes
+                    </a>
+                    <a href="#" data-view="explore" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-rocket w-6 text-center text-lg"></i> Explore Programs
+                    </a>
+                    <a href="#" data-view="terms" class="nav-link flex items-center gap-4 px-4 py-4 lg:py-3 rounded-xl text-gray-800 font-medium">
+                        <i class="fa-solid fa-file-shield w-6 text-center text-lg"></i> T&C
+                    </a>
+                </nav>
+            </div>
+            <!-- Version info -->
+            <div class="p-4 text-center text-xs text-gray-400 border-t border-gray-200">
+                <p class="font-bold text-gray-500 uppercase tracking-wider mb-1 text-[10px]">Built For Change - Designed For U</p>
+                v2.0.0 Mobile UX Optimized
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="flex-1 p-4 sm:p-6 lg:p-8 transition-all overflow-y-auto min-h-[calc(100vh-100px)] pb-28 lg:pb-8">
+            <!-- Content will be injected here -->
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+    <script>
+        const dietPlanData = {
+            client: {
+                name: "Nikhil Nachappa MS",
+                goal: "Muscle Gain & Body Recomposition",
+                age: 22,
+                gender: "Male",
+                currentWeight: "58 kg",
+                height: "170 cm (5'7\")",
+                bmr: 1540,
+                bmi: 20.0,
+                tdee: 2650,
+                calorieTarget: 2750,
+                dietaryPreference: "Non-Veg (Strictly Dairy-Free)",
+                activityLevel: "Intense (6-7 days/week)"
+            },
+            weeks: {
+                week1: {
+                    title: "Week 1: Foundation (Dairy-Free Muscle Prep)",
+                    focus: "Priming your metabolism for growth. Nutrient timing is key: Eat your snack 45-60 mins before lifting.",
+                    meals: [
+                        {
+                            time: "Breakfast",
+                            icon: "fa-solid fa-sun",
+                            items: [
+                                { name: "Poha/Avalakki", quantity: "300g cooked (from 100g raw)", link: "Poha Recipe Dairy Free" },
+                                { name: "Boiled Eggs", quantity: "3 whole (150g)", link: "Boiled Eggs Recipe" },
+                                { name: "Cold-Pressed Coconut Oil (for cooking)", quantity: "0.5 tbsp (7g)", link: "Cooking with Coconut Oil" }
+                            ],
+                            macros: { p: "25g", c: "78g", f: "23g", fiber: "4g", kcal: "619" },
+                            micros: "Iron, B12, Magnesium, Selenium",
+                            alternative: "Oats Porridge (made with water) + 3 Boiled Eggs"
+                        },
+                        {
+                            time: "Lunch",
+                            icon: "fa-solid fa-utensils",
+                            items: [
+                                { name: "White Rice", quantity: "400g cooked (approx 130g raw)", link: "Perfect White Rice Recipe" },
+                                { name: "Chicken Breast Curry (Dairy-Free)", quantity: "150g raw wt + 0.5 tbsp oil", link: "South Indian Chicken Curry Recipe Dairy Free" },
+                                { name: "Veg Palya (Dry Veg: Beans/Carrots)", quantity: "1 Cup (150g)", link: "Veg Palya Recipe Dairy Free" }
+                            ],
+                            macros: { p: "46g", c: "114g", f: "18g", fiber: "7g", kcal: "778" },
+                            micros: "Iron, B6, Zinc, Niacin",
+                            alternative: "4 Chapatis + 150g Chicken Curry + Cucumber"
+                        },
+                        {
+                            time: "Pre-Workout Snack (Energy)",
+                            icon: "fa-solid fa-dumbbell",
+                            items: [
+                                { name: "Sprouts Salad", quantity: "1.5 cups (150g raw sprouted)", link: "Sprouted Moong Salad Recipe" },
+                                { name: "Banana", quantity: "1 Medium (100g)", link: "Banana Benefits" },
+                                { name: "Roasted Peanuts", quantity: "30g", link: "Roasted Peanuts Benefits" }
+                            ],
+                            macros: { p: "21g", c: "55g", f: "16g", fiber: "12g", kcal: "448" },
+                            micros: "Folate, Fast Carbs (Glycogen), Nitric Oxide",
+                            alternative: "Peanut Butter Sandwich (2 slices Bread + 1.5 tbsp PB)"
+                        },
+                        {
+                            time: "Dinner (Post-Workout Recovery)",
+                            icon: "fa-solid fa-moon",
+                            items: [
+                                { name: "Ragi Mudde / White Rice", quantity: "1.5 balls / 300g cooked", link: "Ragi Mudde Recipe" },
+                                { name: "Soya Chunks Curry (with 0.5 tbsp oil)", quantity: "75g raw Soya", link: "Soya Chunks Curry Recipe Dairy Free" },
+                                { name: "Boiled Egg Whites", quantity: "3 (99g)", link: "Boiled Eggs Recipe" },
+                                { name: "Fresh Salad", quantity: "1 bowl (100g)", link: "Simple Green Salad Recipe" }
+                            ],
+                            macros: { p: "58g", c: "100g", f: "10g", fiber: "23g", kcal: "722" },
+                            micros: "Amino Acids, High Protein for Tissue Repair",
+                            alternative: "3 Chapatis + Egg Curry (4 Eggs) without dairy"
+                        },
+                        { 
+                            time: "Total Daily Intake", 
+                            icon: "fa-solid fa-calculator",
+                            item: "Daily Average", 
+                            macros: { p: "~150g", c: "~347g", f: "~67g", fiber: "~46g", kcal: "~2567" },
+                            micros: "Coach's Note: Notice the high carbs. Carbs are protein-sparing, meaning they allow your protein to build muscle instead of being burned for energy.", 
+                            isTotal: true
+                        }
+                    ]
+                },
+                week2: {
+                    title: "Week 2: Volume Accrual",
+                    focus: "Stepping up carbohydrates to perfectly fuel your 6-7 day intense workout split.",
+                    meals: [
+                        {
+                            time: "Breakfast",
+                            icon: "fa-solid fa-sun",
+                            items: [
+                                { name: "Idlis", quantity: "5 pcs (250g)", link: "Soft Idli Recipe" },
+                                { name: "Sambar", quantity: "1 cup (220g)", link: "Hotel Style Sambar Recipe" },
+                                { name: "Coconut Chutney", quantity: "2 tbsp (30g)", link: "Coconut Chutney Recipe Dairy Free" },
+                                { name: "Boiled Eggs", quantity: "4 (3 whole + 1 white)", link: "Boiled Eggs Recipe" }
+                            ],
+                            macros: { p: "39g", c: "83g", f: "29g", fiber: "9g", kcal: "749" },
+                            micros: "Fermented Carbs, Complete Protein, Healthy Fats",
+                            alternative: "3 Set Dosas + Chicken Keema (no dairy)"
+                        },
+                        {
+                            time: "Lunch",
+                            icon: "fa-solid fa-utensils",
+                            items: [
+                                { name: "Chapati", quantity: "4 pcs (200g cooked)", link: "Soft Chapati Recipe Dairy Free" },
+                                { name: "Egg Curry (Dairy-Free)", quantity: "3 Whole Eggs", link: "Egg Curry Recipe Dairy Free" },
+                                { name: "Soya Chunks Fry", quantity: "50g (Raw Soya wt)", link: "Soya Chunks Fry Recipe Dairy Free" }
+                            ],
+                            macros: { p: "59g", c: "112g", f: "30g", fiber: "21g", kcal: "954" },
+                            micros: "Selenium, High Protein, Sustained Energy",
+                            alternative: "350g White Rice + 3 Eggs + Soya"
+                        },
+                        {
+                            time: "Pre-Workout Snack (Energy)",
+                            icon: "fa-solid fa-bolt",
+                            items: [
+                                { name: "Peanut Butter Sandwich", quantity: "2 Slices Whole Wheat Bread + 2 tbsp PB", link: "Peanut Butter Benefits" },
+                                { name: "Banana", quantity: "1 Medium", link: "Banana Benefits" },
+                                { name: "Black Coffee", quantity: "1 Cup", link: "Black Coffee Pre Workout" }
+                            ],
+                            macros: { p: "15g", c: "55g", f: "17g", fiber: "9g", kcal: "433" },
+                            micros: "Potassium, Caffeine (Energy), Healthy Fats",
+                            alternative: "Fruit Salad + 40g Roasted Peanuts"
+                        },
+                        {
+                            time: "Dinner (Post-Workout Recovery)",
+                            icon: "fa-solid fa-moon",
+                            items: [
+                                { name: "White Rice", quantity: "350g cooked", link: "Perfect White Rice Recipe" },
+                                { name: "Chicken Masala (No Dairy)", quantity: "150g raw Breast", link: "Chicken Masala Recipe Dairy Free" },
+                                { name: "Cucumber Salad", quantity: "1 bowl (100g)", link: "Cucumber Salad Recipe" }
+                            ],
+                            macros: { p: "43g", c: "102g", f: "14g", fiber: "6g", kcal: "706" },
+                            micros: "Protein Synthesis, Hydration",
+                            alternative: "Foxtail Millet Rice + Fish/Chicken Curry"
+                        },
+                        { 
+                            time: "Total Daily Intake", 
+                            icon: "fa-solid fa-calculator",
+                            item: "Daily Average", 
+                            macros: { p: "~156g", c: "~352g", f: "~90g", fiber: "~45g", kcal: "~2842" },
+                            micros: "Coach's Note: Calorie surplus achieved. Your digestion is supported by 45g of fiber.", 
+                            isTotal: true
+                        }
+                    ]
+                },
+                week3: {
+                    title: "Week 3: Hypertrophy Peak",
+                    focus: "Maximum training intensity requires high energy. Pushing carbs to fuel gym PRs.",
+                      meals: [
+                        {
+                            time: "Breakfast",
+                            icon: "fa-solid fa-sun",
+                            items: [
+                                { name: "Dosas (Cooked in Peanut/Coconut Oil)", quantity: "5 Medium (300g)", link: "Plain Dosa Recipe Dairy Free" },
+                                { name: "Peanut Chutney", quantity: "1.5 tbsp (20g)", link: "Peanut Chutney Recipe" },
+                                { name: "Chicken Keema / Egg Roast", quantity: "150g Chicken / 4 Eggs", link: "Chicken Keema Recipe Dairy Free" }
+                            ],
+                            macros: { p: "46g", c: "85g", f: "35g", fiber: "6g", kcal: "839" },
+                            micros: "High Calorie, Lean Protein, Fast Digestion",
+                            alternative: "4 Idlis + Sambar + 4 Eggs"
+                        },
+                        {
+                            time: "Lunch",
+                            icon: "fa-solid fa-utensils",
+                            items: [
+                                { name: "Lemon Rice / Puliyogare", quantity: "400g cooked", link: "Lemon Rice Recipe" },
+                                { name: "Soya Chunks Fry (Dry)", quantity: "75g Soya (Raw wt)", link: "Dry Soya Recipe Dairy Free" },
+                                { name: "Cucumber / Tomato Slices", quantity: "1 bowl", link: "Salad Recipe" }
+                            ],
+                            macros: { p: "51g", c: "135g", f: "22g", fiber: "15g", kcal: "942" },
+                            micros: "Vitamin C, High Protein, Sodium for pumps",
+                            alternative: "Bisibelebath (No Ghee) + Soya Fry"
+                        },
+                        {
+                            time: "Pre-Workout Snack (Energy)",
+                            icon: "fa-solid fa-bolt",
+                            items: [
+                                { name: "Boiled Eggs", quantity: "2 whole (100g)", link: "Boiled Eggs Recipe" },
+                                { name: "Almonds", quantity: "Handful (30g)", link: "Almonds Benefits" },
+                                { name: "Apple", quantity: "1 Medium (150g)", link: "Apple Benefits" }
+                            ],
+                            macros: { p: "18g", c: "28g", f: "25g", fiber: "8g", kcal: "409" },
+                            micros: "Magnesium, Potassium, Sustained Energy",
+                            alternative: "Sweet Potato (boiled) + 2 Eggs"
+                        },
+                        {
+                            time: "Dinner (Post-Workout Recovery)",
+                            icon: "fa-solid fa-moon",
+                            items: [
+                                { name: "White Rice", quantity: "300g cooked", link: "Perfect White Rice Recipe" },
+                                { name: "Dal / Sambar (with 0.5 tbsp Coconut Oil)", quantity: "1.5 Cups (300g)", link: "Sambar Recipe Dairy Free" },
+                                { name: "Egg Whites", quantity: "5 (165g)", link: "Boiled Eggs Recipe" }
+                            ],
+                            macros: { p: "34g", c: "105g", f: "6g", fiber: "7g", kcal: "610" },
+                            micros: "Fiber, Iron, Pure Protein",
+                            alternative: "3 Parathas (Dairy-Free) + Chicken/Soya Curry"
+                        },
+                        { 
+                            time: "Total Daily Intake", 
+                            icon: "fa-solid fa-calculator",
+                            item: "Daily Average", 
+                            macros: { p: "~149g", c: "~353g", f: "~88g", fiber: "~36g", kcal: "~2800" },
+                            micros: "Coach's Note: Very high carb week to fully top up glycogen stores for heavy lifting.", 
+                            isTotal: true
+                        }
+                    ]
+                },
+                week4: {
+                    title: "Week 4: Maximum Mass Surplus",
+                    focus: "Peak calorie and protein week. Pure focus on feeding muscle tissue recovery.",
+                    meals: [
+                        {
+                            time: "Breakfast",
+                            icon: "fa-solid fa-sun",
+                            items: [
+                                { name: "Oats Porridge (Water/Almond Milk)", quantity: "100g dry Oats", link: "Oats Porridge Recipe Water" },
+                                { name: "Peanut Butter (Stirred in)", quantity: "2 tbsp (30g)", link: "Peanut Butter Benefits" },
+                                { name: "Eggs", quantity: "5 Whites + 1 Whole", link: "Boiled Eggs Recipe" }
+                            ],
+                            macros: { p: "45g", c: "75g", f: "27g", fiber: "12g", kcal: "723" },
+                            micros: "Beta-Glucan, Choline, Zinc",
+                            alternative: "4 Dosas + Peanut Chutney + 4 Egg Whites"
+                        },
+                        {
+                            time: "Lunch",
+                            icon: "fa-solid fa-utensils",
+                            items: [
+                                { name: "Tomato Rice / Rice Bath", quantity: "400g cooked", link: "Tomato Rice Recipe Dairy Free" },
+                                { name: "Chicken Curry (Dairy-Free)", quantity: "200g raw Chicken Breast", link: "Chicken Curry Recipe Dairy Free" },
+                                { name: "Cucumber Onion Salad", quantity: "100g", link: "Salad Recipe" }
+                            ],
+                            macros: { p: "57g", c: "120g", f: "27g", fiber: "7g", kcal: "951" },
+                            micros: "Lycopene, Protein, High Energy",
+                            alternative: "400g White Rice + Chicken Masala"
+                        },
+                        {
+                            time: "Pre-Workout Snack (Energy)",
+                            icon: "fa-solid fa-bolt",
+                            items: [
+                                { name: "Sprouted Moong", quantity: "1 small cup (100g raw)", link: "Sprouts Benefits" },
+                                { name: "Apple", quantity: "1 Medium (150g)", link: "Apple Benefits" },
+                                { name: "Roasted Peanuts", quantity: "30g", link: "Peanuts Benefits" }
+                            ],
+                            macros: { p: "16g", c: "44g", f: "16g", fiber: "11g", kcal: "384" },
+                            micros: "Living Enzymes, Vitamin C, Healthy Fats",
+                            alternative: "Roasted Chana (50g) + Fruit"
+                        },
+                        {
+                            time: "Dinner (Post-Workout Recovery)",
+                            icon: "fa-solid fa-moon",
+                            items: [
+                                { name: "Ragi Mudde / White Rice", quantity: "2 Balls / 400g", link: "Ragi Mudde Recipe" },
+                                { name: "Soya Chunks Curry (with 0.5 tbsp Peanut Oil)", quantity: "75g Soya (Raw wt)", link: "Soya Curry Recipe Dairy Free" },
+                                { name: "Egg Whites", quantity: "3 (100g)", link: "Boiled Eggs Recipe" }
+                            ],
+                            macros: { p: "59g", c: "118g", f: "8g", fiber: "24g", kcal: "780" },
+                            micros: "Calcium, Plant Protein, Recovery",
+                            alternative: "3 Chapatis + 150g Chicken Keema"
+                        },
+                        { 
+                            time: "Total Daily Intake", 
+                            icon: "fa-solid fa-calculator",
+                            item: "Daily Average", 
+                            macros: { p: "~177g", c: "~357g", f: "~78g", fiber: "~54g", kcal: "~2838" },
+                            micros: "Coach's Note: Maximum tissue building week. Ragi and Oats provide massive, healthy 54g of fiber.", 
+                            isTotal: true
+                        }
+                    ]
+                }
+            }
+        };
+
+        const workoutData = {
+            day1: {
+                tab: "Day 1 (Push)",
+                title: "DAY 1: PUSH A",
+                target: "(Chest, Shoulders, Triceps)",
+                focus: "Heavy horizontal pressing for chest thickness.",
+                bgClass: "bg-blue-50", borderClass: "border-blue-200", titleClass: "text-blue-900", iconClass: "text-blue-600", focusClass: "text-blue-700",
+                icon: "fa-solid fa-arrow-up-right-dots",
+                exercises: [
+                    { name: "Flat Barbell Bench Press", sets: "4", reps: "6-8", muscle: "Overall Chest" },
+                    { name: "Incline Dumbbell Press", sets: "3", reps: "8-10", muscle: "Upper Chest" },
+                    { name: "Seated DB Shoulder Press", sets: "3", reps: "8-10", muscle: "Front/Mid Delts" },
+                    { name: "Dumbbell Lateral Raises", sets: "3", reps: "12-15", muscle: "Side Delts" },
+                    { name: "Tricep Rope Pushdowns", sets: "3", reps: "10-12", muscle: "Triceps" },
+                    { name: "Overhead Tricep Ext.", sets: "3", reps: "10-12", muscle: "Triceps (Long head)" }
+                ]
+            },
+            day2: {
+                tab: "Day 2 (Pull)",
+                title: "DAY 2: PULL A",
+                target: "(Back, Biceps, Rear Delts)",
+                focus: "Vertical pulling for back width.",
+                bgClass: "bg-orange-50", borderClass: "border-orange-200", titleClass: "text-orange-900", iconClass: "text-orange-600", focusClass: "text-orange-700",
+                icon: "fa-solid fa-arrows-down-to-line",
+                exercises: [
+                    { name: "Lat Pulldowns (Wide Grip)", sets: "4", reps: "8-10", muscle: "Lats (Width)" },
+                    { name: "Barbell or T-Bar Rows", sets: "3", reps: "8-10", muscle: "Back Thickness" },
+                    { name: "Seated Cable Rows", sets: "3", reps: "10-12", muscle: "Mid Back" },
+                    { name: "Face Pulls (Cable)", sets: "3", reps: "12-15", muscle: "Rear Delts" },
+                    { name: "Barbell Bicep Curls", sets: "3", reps: "10-12", muscle: "Biceps" },
+                    { name: "Hammer Curls (Dumbbell)", sets: "3", reps: "10-12", muscle: "Brachialis" }
+                ]
+            },
+            day3: {
+                tab: "Day 3 (Legs)",
+                title: "DAY 3: LEGS A & CORE",
+                target: "(Quads, Hamstrings, Calves)",
+                focus: "Quad dominance and heavy squats.",
+                bgClass: "bg-emerald-50", borderClass: "border-emerald-200", titleClass: "text-emerald-900", iconClass: "text-emerald-600", focusClass: "text-emerald-700",
+                icon: "fa-solid fa-person-walking",
+                exercises: [
+                    { name: "Barbell Back Squats", sets: "4", reps: "6-8", muscle: "Quads & Glutes" },
+                    { name: "Leg Press", sets: "3", reps: "10-12", muscle: "Overall Legs" },
+                    { name: "Leg Extensions", sets: "3", reps: "12-15", muscle: "Quads (Iso)" },
+                    { name: "Lying Leg Curls", sets: "3", reps: "10-12", muscle: "Hamstrings" },
+                    { name: "Standing Calf Raises", sets: "4", reps: "15-20", muscle: "Calves" },
+                    { name: "Plank", sets: "3", reps: "45-60s", muscle: "Core" }
+                ]
+            },
+            day4: {
+                tab: "Day 4 (Push)",
+                title: "DAY 4: PUSH B",
+                target: "(Shoulders, Chest, Triceps)",
+                focus: "Vertical pressing for shoulder growth and upper chest.",
+                bgClass: "bg-blue-50", borderClass: "border-blue-200", titleClass: "text-blue-900", iconClass: "text-blue-600", focusClass: "text-blue-700",
+                icon: "fa-solid fa-arrow-up-right-dots",
+                exercises: [
+                    { name: "Overhead Barbell Press", sets: "4", reps: "6-8", muscle: "Shoulders" },
+                    { name: "Incline Dumbbell Press", sets: "3", reps: "8-10", muscle: "Upper Chest" },
+                    { name: "Cable Crossovers", sets: "3", reps: "12-15", muscle: "Inner Chest" },
+                    { name: "Dumbbell Lateral Raises", sets: "4", reps: "12-15", muscle: "Side Delts" },
+                    { name: "Skull Crushers (EZ Bar)", sets: "3", reps: "10-12", muscle: "Triceps" },
+                    { name: "Tricep Straight Pushdowns", sets: "3", reps: "10-12", muscle: "Triceps" }
+                ]
+            },
+            day5: {
+                tab: "Day 5 (Pull)",
+                title: "DAY 5: PULL B",
+                target: "(Back, Biceps, Rear Delts)",
+                focus: "Horizontal pulling for back thickness.",
+                bgClass: "bg-orange-50", borderClass: "border-orange-200", titleClass: "text-orange-900", iconClass: "text-orange-600", focusClass: "text-orange-700",
+                icon: "fa-solid fa-arrows-down-to-line",
+                exercises: [
+                    { name: "Deadlifts (Conv/Sumo)", sets: "3", reps: "5-7", muscle: "Posterior Chain" },
+                    { name: "Pull-ups (Assisted OK)", sets: "3", reps: "8-10", muscle: "Lats" },
+                    { name: "Single Arm DB Rows", sets: "3", reps: "8-10", muscle: "Lats / Mid Back" },
+                    { name: "Reverse Pec Deck Flyes", sets: "3", reps: "12-15", muscle: "Rear Delts" },
+                    { name: "Incline DB Bicep Curls", sets: "3", reps: "10-12", muscle: "Biceps (Long)" },
+                    { name: "Preacher Curls", sets: "3", reps: "10-12", muscle: "Biceps (Short)" }
+                ]
+            },
+            day6: {
+                tab: "Day 6 (Legs)",
+                title: "DAY 6: LEGS B & CORE",
+                target: "(Hamstrings, Quads, Calves)",
+                focus: "Hamstring dominance and glutes.",
+                bgClass: "bg-emerald-50", borderClass: "border-emerald-200", titleClass: "text-emerald-900", iconClass: "text-emerald-600", focusClass: "text-emerald-700",
+                icon: "fa-solid fa-person-walking",
+                exercises: [
+                    { name: "Romanian Deadlifts (RDLs)", sets: "4", reps: "8-10", muscle: "Hamstrings" },
+                    { name: "Leg Press (High Feet)", sets: "3", reps: "10-12", muscle: "Glutes/Hams" },
+                    { name: "Walking Lunges", sets: "3", reps: "10-12 /leg", muscle: "Quads & Glutes" },
+                    { name: "Seated Leg Curls", sets: "3", reps: "10-12", muscle: "Hamstrings" },
+                    { name: "Seated Calf Raises", sets: "4", reps: "15-20", muscle: "Calves" },
+                    { name: "Hanging Leg Raises", sets: "3", reps: "12-15", muscle: "Lower Abs" }
+                ]
+            },
+            day7: {
+                tab: "Day 7 (Rest)",
+                title: "DAY 7: Rest & Recovery",
+                isRest: true,
+                desc: "Complete rest from lifting. Light stretching, yoga, or a 20-minute walk is acceptable. Eat your surplus calories to allow the muscles to repair and grow.",
+                icon: "fa-solid fa-bed"
+            }
+        };
+
+        const bmiData = [
+            { label: 'Underweight', range: '< 18.5', color: 'bg-blue-400', risk: 'Potential nutritional deficiencies.' },
+            { label: 'Normal', range: '18.5 - 24.9', color: 'bg-green-500', risk: 'Healthy Weight (Nikhil is here).' },
+            { label: 'Overweight', range: '25.0 - 29.9', color: 'bg-yellow-400', risk: 'Increased risk of health issues.' },
+            { label: 'Obese', range: '30.0+', color: 'bg-red-600', risk: 'High risk of health issues.' }
+        ];
+
+        const mainContent = document.getElementById('main-content');
+        const navigation = document.getElementById('navigation');
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const overlay = document.getElementById('mobile-overlay');
+        const mobileNavStrip = document.querySelector('.overflow-x-auto');
+
+        let macroChart = null;
+
+        function renderDashboard() {
+            const { client } = dietPlanData;
+            
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 id="dashboard-h2" class="text-3xl md:text-4xl font-black text-gray-900 mb-1 uppercase italic tracking-tight">Welcome to <a href="https://www.kn0x.fit/" target="_blank" class="text-red-600 hover:text-red-700 hover:underline">KN0X.FIT</a></h2>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-6 border-l-4 border-red-600 pl-3">Built For Change - Designed For U</p>
+                    <p class="text-gray-600 mb-8 text-base md:text-lg leading-relaxed">Hello <span class="font-bold text-gray-900">${client.name}</span>! Your <strong class="text-red-600">${client.goal}</strong> plan is ready.</p>
+
+                    <!-- Metrics Grid (Optimized 2x2 for Mobile) -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 md:mb-8">
+                        
+                        <!-- BMI Card -->
+                        <div class="bg-white p-3 sm:p-5 rounded-2xl shadow-sm border-l-4 border-green-500 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 tap-effect">
+                            <div class="bg-green-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-weight-scale text-lg sm:text-xl text-green-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5 sm:mb-1">BMI</p>
+                                <p class="text-xl sm:text-2xl font-black text-gray-900 leading-none mb-0.5 sm:mb-1">${client.bmi}</p>
+                                <p class="text-[9px] sm:text-xs font-semibold text-green-500">Healthy</p>
+                            </div>
+                        </div>
+
+                        <!-- BMR Card -->
+                        <div class="bg-white p-3 sm:p-5 rounded-2xl shadow-sm border-l-4 border-red-500 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 tap-effect">
+                            <div class="bg-red-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-fire text-lg sm:text-xl text-red-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5 sm:mb-1">BMR</p>
+                                <p class="text-xl sm:text-2xl font-black text-gray-900 leading-none mb-0.5 sm:mb-1">${client.bmr}</p>
+                                <p class="text-[9px] sm:text-xs font-medium text-gray-400">Calories/Day</p>
+                            </div>
+                        </div>
+
+                        <!-- TDEE Card -->
+                        <div class="bg-white p-3 sm:p-5 rounded-2xl shadow-sm border-l-4 border-black flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 tap-effect">
+                            <div class="bg-gray-100 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-person-running text-lg sm:text-xl text-black"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5 sm:mb-1">TDEE</p>
+                                <p class="text-xl sm:text-2xl font-black text-gray-900 leading-none mb-0.5 sm:mb-1">${client.tdee}</p>
+                                <p class="text-[9px] sm:text-xs font-medium text-gray-400">Maintenance</p>
+                            </div>
+                        </div>
+
+                        <!-- Daily Target Card -->
+                        <div class="bg-white p-3 sm:p-5 rounded-2xl shadow-sm border-l-4 border-gray-500 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 tap-effect">
+                            <div class="bg-gray-100 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-bullseye text-lg sm:text-xl text-gray-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-wider mb-0.5 sm:mb-1">Target</p>
+                                <p class="text-xl sm:text-2xl font-black text-red-600 leading-none mb-0.5 sm:mb-1">${client.calorieTarget}</p>
+                                <p class="text-[9px] sm:text-xs font-medium text-gray-400">Goal Intake</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <!-- Client Profile -->
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100">
+                            <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-4 uppercase flex items-center"><i class="fa-solid fa-user-tag text-red-600 mr-3"></i> Client Profile</h3>
+                            <ul class="space-y-3 sm:space-y-4 text-gray-700 text-sm md:text-base">
+                                <li class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500 font-medium">Name</span> 
+                                    <span class="font-bold text-gray-900 sm:text-right mt-1 sm:mt-0">${client.name}</span>
+                                </li>
+                                <li class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500 font-medium">Age</span> 
+                                    <span class="font-bold text-gray-900 sm:text-right mt-1 sm:mt-0">${client.age}</span>
+                                </li>
+                                <li class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500 font-medium">Stats</span> 
+                                    <span class="font-bold text-gray-900 sm:text-right mt-1 sm:mt-0">${client.height} | ${client.currentWeight}</span>
+                                </li>
+                                <li class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500 font-medium">Goal</span> 
+                                    <span class="font-bold text-red-600 sm:text-right mt-1 sm:mt-0">${client.goal}</span>
+                                </li>
+                                <li class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500 font-medium">Diet</span> 
+                                    <span class="font-bold text-gray-900 sm:text-right mt-1 sm:mt-0 break-words">${client.dietaryPreference}</span>
+                                </li>
+                                <li class="flex flex-col sm:flex-row sm:justify-between pt-1">
+                                    <span class="text-gray-500 font-medium">Level</span> 
+                                    <span class="font-bold text-gray-900 sm:text-right mt-1 sm:mt-0">${client.activityLevel}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Macros Chart -->
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100">
+                            <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-4 uppercase flex items-center"><i class="fa-solid fa-chart-pie text-red-600 mr-3"></i> Macros</h3>
+                            <div id="chart-skeleton" class="chart-container h-64 max-h-64 mx-auto max-w-xs flex flex-col items-center justify-center space-y-3 p-4 bg-gray-50 rounded-lg animate-pulse">
+                                <div class="w-3/4 h-3 bg-gray-300 rounded"></div>
+                                <div class="w-full h-40 bg-gray-300 rounded-full"></div>
+                                <div class="w-1/2 h-3 bg-gray-300 rounded"></div>
+                            </div>
+                            <div id="chart-wrapper" class="chart-container h-64 max-h-64 mx-auto max-w-xs hidden relative w-full">
+                                <canvas id="macroChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100 mb-6">
+                        <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-4 uppercase">BMI Analysis (${client.bmi})</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            ${bmiData.map(item => `
+                                <div class="p-3 rounded-xl border border-gray-100 bg-gray-50 tap-effect">
+                                    <div class="flex items-center mb-1">
+                                        <div class="w-2 h-2 rounded-full ${item.color} mr-2 flex-shrink-0"></div>
+                                        <p class="font-bold uppercase text-[10px] sm:text-xs text-gray-800 leading-none">${item.label}</p>
+                                    </div>
+                                    <p class="text-[9px] sm:text-[10px] text-gray-500 font-mono mb-1">${item.range}</p>
+                                    <p class="text-[9px] sm:text-[10px] text-gray-600 leading-tight">${item.risk}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="font-bold text-gray-700 text-xs sm:text-sm">Your Position</h4>
+                                <span class="text-green-600 font-bold text-[10px] sm:text-xs">Healthy Zone</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                                <div class="h-3 rounded-full bg-green-500" style="width: ${(client.bmi / 40) * 100}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            initMacroChart(); 
+        }
+
+        function _createChartInstance() {
+            const proteinGrams = 155; // Mathematical average for the chart
+            const carbsGrams = 350;
+            const fatsGrams = 80;
+
+            const proteinCalories = proteinGrams * 4;
+            const carbsCalories = carbsGrams * 4;
+            const fatsCalories = fatsGrams * 9;
+            const ctx = document.getElementById('macroChart').getContext('2d');
+            if (macroChart) {
+                macroChart.destroy();
+            }
+            macroChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [`Protein (~${proteinGrams}g)`, `Carbs (~${carbsGrams}g)`, `Fats (~${fatsGrams}g)`],
+                    datasets: [{
+                        data: [proteinCalories, carbsCalories, fatsCalories],
+                        backgroundColor: ['#dc2626', '#3b82f6', '#eab308'],
+                        borderColor: '#fff',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart',
+                        delay: 100
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 11,
+                                    family: "'Inter', sans-serif",
+                                    weight: 'bold'
+                                },
+                                color: '#374151',
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            cornerRadius: 8,
+                            titleFont: { family: "'Inter', sans-serif", size: 13 },
+                            bodyFont: { family: "'Inter', sans-serif", size: 13 },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        const totalCalories = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = ((context.raw / totalCalories) * 100).toFixed(1);
+                                        label += `${context.raw.toFixed(0)} kcal (${percentage}%)`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function initMacroChart() {
+            const chartSkeleton = document.getElementById('chart-skeleton');
+            const chartWrapper = document.getElementById('chart-wrapper');
+            
+            if (typeof Chart !== 'undefined') {
+                _createChartInstance(); 
+                if (chartSkeleton && chartWrapper) {
+                    chartSkeleton.classList.add('hidden');
+                    chartWrapper.classList.remove('hidden');
+                }
+            } else {
+                if (chartSkeleton) {
+                    chartSkeleton.classList.remove('hidden');
+                }
+                setTimeout(initMacroChart, 50);
+            }
+        }
+
+        window.currentWorkoutDay = 'day1';
+
+        window.setWorkoutDay = function(day) {
+            window.currentWorkoutDay = day;
+            renderWorkout();
+        };
+
+        function renderWorkout() {
+            const activeDayData = workoutData[window.currentWorkoutDay];
+
+            // Render sub-navigation tabs (Mobile Optimized with snap)
+            const tabsHtml = Object.keys(workoutData).map(key => {
+                const isActive = key === window.currentWorkoutDay;
+                return `
+                    <button onclick="setWorkoutDay('${key}')" class="snap-center flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-200 ${isActive ? 'bg-black text-white shadow-lg scale-105' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-black'}">
+                        ${workoutData[key].tab}
+                    </button>
+                `;
+            }).join('');
+
+            // Render the specific day content
+            let contentHtml = '';
+            if (activeDayData.isRest) {
+                contentHtml = `
+                    <div class="bg-gray-900 rounded-3xl shadow-xl border border-gray-800 text-center p-8 md:p-12 mt-6 content-fade-in mx-1">
+                        <div class="inline-block bg-blue-500/20 p-5 rounded-full mb-4">
+                            <i class="${activeDayData.icon} text-4xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-4 uppercase tracking-widest">${activeDayData.title}</h3>
+                        <p class="text-gray-400 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">${activeDayData.desc}</p>
+                    </div>
+                `;
+            } else {
+                // Mobile Optimized App-Style Card Layout
+                contentHtml = `
+                    <div class="mt-4 content-fade-in">
+                        <div class="${activeDayData.bgClass} px-5 py-4 rounded-t-3xl border-x border-t ${activeDayData.borderClass} flex flex-col md:flex-row md:items-center justify-between gap-3 mx-1">
+                            <div>
+                                <h3 class="font-black ${activeDayData.titleClass} text-lg md:text-xl flex items-center gap-2 uppercase tracking-wide">
+                                    <i class="${activeDayData.icon} ${activeDayData.iconClass}"></i> ${activeDayData.title}
+                                </h3>
+                                <p class="text-xs md:text-sm ${activeDayData.focusClass} mt-1 font-medium leading-relaxed"><strong>Focus:</strong> ${activeDayData.focus}</p>
+                            </div>
+                            <div class="bg-white/80 px-3 py-1.5 rounded-lg border ${activeDayData.borderClass} inline-block w-max shadow-sm">
+                                <span class="text-[10px] sm:text-xs font-bold ${activeDayData.iconClass} uppercase tracking-wider">${activeDayData.target}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-b-3xl shadow-sm p-3 sm:p-5 mx-1">
+                            <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                                ${activeDayData.exercises.map(ex => `
+                                    <div class="bg-gray-50 hover:bg-red-50/40 transition-colors border border-gray-200 hover:border-red-200 rounded-2xl p-4 sm:p-5 active:scale-[0.99] group flex flex-col gap-3 sm:gap-4">
+                                        <div class="flex justify-between items-start gap-2">
+                                            <a href="https://www.youtube.com/results?search_query=How+to+do+${encodeURIComponent(ex.name)}+perfect+form" target="_blank" class="text-sm sm:text-base md:text-lg font-black text-gray-900 flex items-start gap-2 hover:text-red-600 transition-colors leading-snug">
+                                                <i class="fa-brands fa-youtube text-red-500 mt-0.5 text-lg sm:text-xl shrink-0 group-hover:scale-110 transition-transform"></i> 
+                                                <span>${ex.name}</span>
+                                            </a>
+                                            <span class="bg-white border border-gray-200 text-gray-600 px-2 py-1 rounded text-[9px] sm:text-[10px] font-bold uppercase tracking-wider shadow-sm shrink-0 text-right max-w-[40%] sm:max-w-none leading-tight">${ex.muscle}</span>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-white border border-gray-200 px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-2">
+                                                <span class="text-[10px] sm:text-xs uppercase text-gray-400 font-bold">Sets</span>
+                                                <span class="text-sm sm:text-base font-black text-gray-800">${ex.sets}</span>
+                                            </div>
+                                            <div class="bg-red-50 border border-red-100 px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-2">
+                                                <span class="text-[10px] sm:text-xs uppercase text-red-400 font-bold">Reps</span>
+                                                <span class="text-sm sm:text-base font-black text-red-600">${ex.reps}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 class="text-2xl md:text-4xl font-black text-gray-900 mb-4 uppercase italic tracking-tight">Workout Plan</h2>
+                    
+                    <!-- Compact Scientific Result-Oriented Guide -->
+                    <div class="mb-4 bg-yellow-50 p-4 md:p-5 rounded-2xl border border-yellow-200 flex items-start gap-3 shadow-sm mx-1">
+                         <div class="bg-yellow-200/60 p-2 rounded-lg text-yellow-700 shrink-0"><i class="fa-solid fa-bolt text-lg sm:text-xl"></i></div>
+                         <div>
+                             <h3 class="font-black text-yellow-900 text-sm md:text-base uppercase tracking-wide">PPL Hypertrophy Science</h3>
+                             <p class="text-xs sm:text-sm text-yellow-800 mt-1 leading-relaxed">
+                                 <strong>Rest:</strong> 90-120s (Compounds), 60-90s (Isolations). <br class="hidden sm:block">
+                                 <strong>Tempo:</strong> 3 Seconds down (Eccentric), 1 Second up (Concentric). 
+                             </p>
+                         </div>
+                    </div>
+
+                    <!-- Video Reference Note -->
+                    <div class="mb-4 bg-blue-50 p-3.5 sm:p-4 rounded-2xl border border-blue-200 flex items-start gap-3 shadow-sm mx-1">
+                         <div class="text-blue-500 mt-0.5 shrink-0"><i class="fa-solid fa-circle-play text-lg sm:text-xl"></i></div>
+                         <p class="text-[11px] sm:text-sm text-blue-800 leading-relaxed">
+                             <strong>Video References:</strong> Click on any exercise name below to watch a quick video tutorial. Please refer to these videos to ensure you perform the workout with proper form!
+                         </p>
+                    </div>
+
+                    <!-- Daily Navigation Tabs -->
+                    <div class="flex overflow-x-auto gap-3 pb-4 pt-2 no-scrollbar items-center border-b-2 border-gray-100 snap-x snap-mandatory mx-1">
+                        ${tabsHtml}
+                    </div>
+
+                    <!-- Dynamic Day Content -->
+                    ${contentHtml}
+
+                    <!-- Golden Rules (Updated with RIR) -->
+                    <div class="bg-black text-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-2xl mt-10 relative overflow-hidden mx-1">
+                        <div class="absolute -bottom-10 -right-10 opacity-[0.03]">
+                            <i class="fa-solid fa-dumbbell text-9xl"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-white mb-6 md:mb-8 flex items-center uppercase italic tracking-wide">
+                            <i class="fa-solid fa-crown text-yellow-500 mr-3 md:mr-4 text-2xl md:text-3xl"></i> Golden Rules
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 relative z-10">
+                            <div class="flex items-start">
+                                <div class="bg-red-600 p-2.5 sm:p-3.5 rounded-xl mr-4 sm:mr-5 mt-1 shadow-lg shrink-0"><i class="fa-solid fa-fire text-white text-base sm:text-lg"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-lg sm:text-xl text-red-500 mb-1 sm:mb-2">Train Close to Failure (RIR)</h4>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">This is the secret to muscle growth. Always stop your set leaving exactly <strong>1 to 2 reps in reserve (RIR)</strong>. If you are supposed to do 10 reps, the 10th rep should feel incredibly hard, but you could physically force out an 11th if your life depended on it.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-yellow-500 p-2.5 sm:p-3.5 rounded-xl mr-4 sm:mr-5 mt-1 shadow-lg shrink-0"><i class="fa-solid fa-arrow-trend-up text-black text-base sm:text-lg"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-lg sm:text-xl text-yellow-500 mb-1 sm:mb-2">Progressive Overload</h4>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Because you are a beginner, you will get stronger quickly. Every week, try to either increase the weight by 1-2.5 kg OR do 1-2 more reps with the same weight. <em>If you lift the same weight for the same reps for a month, you will not grow.</em></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white p-2.5 sm:p-3.5 rounded-xl mr-4 sm:mr-5 mt-1 shadow-lg shrink-0"><i class="fa-solid fa-scale-balanced text-black text-base sm:text-lg"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-lg sm:text-xl text-white mb-1 sm:mb-2">Form Over Ego</h4>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Always click the exercise links in your routine to watch video tutorials for major lifts. Poor form leads to injuries which will completely halt your 6-day consistency.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 p-2.5 sm:p-3.5 rounded-xl mr-4 sm:mr-5 mt-1 shadow-lg shrink-0"><i class="fa-solid fa-moon text-white text-base sm:text-lg"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-lg sm:text-xl text-blue-400 mb-1 sm:mb-2">Sleep & Recovery</h4>
+                                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Muscle is torn in the gym, fed in the kitchen, and built in your bed. Aim for 7-8 hours of sleep minimum to maximize recovery.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            `;
+
+            // Auto-scroll mobile nav tab to center when switching workouts
+            setTimeout(() => {
+                const activeTab = document.querySelector(`.snap-center.bg-black`);
+                if(activeTab) {
+                    activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            }, 50);
+        }
+
+        function renderWeek(weekKey) {
+            const weekData = dietPlanData.weeks[weekKey];
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 class="text-2xl md:text-4xl font-black text-gray-900 mb-2 uppercase italic tracking-tight">Diet Plan <span class="text-red-600">/</span> Dairy-Free</h2>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-700 mb-4 sm:mb-6">${weekData.title}</h3>
+                    
+                    <!-- Modified Weekly Focus -->
+                    <div class="mb-4 bg-white p-4 sm:p-5 rounded-2xl border border-gray-200 shadow-sm mx-1">
+                        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                            <strong class="text-gray-900 uppercase text-[10px] sm:text-xs tracking-wider mr-1 block sm:inline mb-1 sm:mb-0"><i class="fa-solid fa-bullseye text-red-500 mr-1"></i> Weekly Focus:</strong> 
+                            ${weekData.focus}
+                        </p>
+                    </div>
+
+                    <!-- Cooking & Prep Note -->
+                    <div class="mb-6 bg-orange-50 p-4 sm:p-5 rounded-2xl border border-orange-200 shadow-sm mx-1 flex gap-3 items-start">
+                        <div class="text-orange-500 shrink-0 mt-0.5"><i class="fa-solid fa-fire-burner text-lg sm:text-xl"></i></div>
+                        <p class="text-xs sm:text-sm text-orange-900 leading-relaxed">
+                            <strong class="uppercase text-[10px] sm:text-xs tracking-wider block mb-1">Prep & Cooking Guide:</strong> 
+                            Strictly use <strong>Cold-Pressed Coconut/Peanut Oil</strong> (Max 0.5 to 1 tbsp per meal). <strong>NO Dairy, Ghee, or Butter.</strong> Weigh Chicken/Soya <strong>raw</strong>. Measure Rice/Millets <strong>cooked</strong>. Avoid deep frying.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 md:space-y-6 mx-1">
+                        ${weekData.meals.map(meal => {
+                            if (meal.isTotal) {
+                                return `
+                                    <div class="bg-gray-900 rounded-3xl shadow-lg border border-gray-800 active:scale-[0.99] transition-transform">
+                                        <div class="p-5 sm:p-6 md:p-8">
+                                            <h3 class="text-lg md:text-xl font-black text-white mb-4 flex items-center gap-3"><i class="${meal.icon} text-red-500"></i> ${meal.item}</h3>
+                                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
+                                                <div class="bg-gray-800/80 p-3 rounded-xl text-center border border-gray-700"><p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Protein</p><p class="text-red-500 font-bold text-base md:text-lg leading-none">${meal.macros.p}</p></div>
+                                                <div class="bg-gray-800/80 p-3 rounded-xl text-center border border-gray-700"><p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Carbs</p><p class="text-blue-400 font-bold text-base md:text-lg leading-none">${meal.macros.c}</p></div>
+                                                <div class="bg-gray-800/80 p-3 rounded-xl text-center border border-gray-700"><p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Fats</p><p class="text-yellow-400 font-bold text-base md:text-lg leading-none">${meal.macros.f}</p></div>
+                                                <div class="bg-gray-800/80 p-3 rounded-xl text-center border border-gray-700"><p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Fiber</p><p class="text-green-400 font-bold text-base md:text-lg leading-none">${meal.macros.fiber}</p></div>
+                                                <div class="bg-gray-800/80 p-3 rounded-xl text-center border border-gray-700 col-span-2 sm:col-span-1"><p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Calories</p><p class="text-white font-bold text-base md:text-lg leading-none">${meal.macros.kcal}</p></div>
+                                            </div>
+                                            <p class="text-xs sm:text-sm text-gray-400 border-t border-gray-700 pt-4 leading-relaxed mt-2"><strong>Coach's Note:</strong> ${meal.micros}</p>
+                                        </div>
+                                    </div>
+                                `;
+                            } else {
+                                // Dynamic Color Logic
+                                let headerClass = 'bg-gray-50 border-gray-100 text-gray-900';
+                                let iconClass = 'text-gray-500';
+
+                                if (meal.time.includes('Breakfast')) {
+                                    headerClass = 'bg-orange-50 border-orange-100 text-orange-900';
+                                    iconClass = 'text-orange-500';
+                                } else if (meal.time.includes('Lunch')) {
+                                    headerClass = 'bg-red-50 border-red-100 text-red-900';
+                                    iconClass = 'text-red-500';
+                                } else if (meal.time.includes('Snack')) {
+                                    headerClass = 'bg-emerald-50 border-emerald-100 text-emerald-900';
+                                    iconClass = 'text-emerald-500';
+                                } else if (meal.time.includes('Dinner')) {
+                                    headerClass = 'bg-indigo-50 border-indigo-100 text-indigo-900';
+                                    iconClass = 'text-indigo-500';
+                                }
+
+                                return `
+                                    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-[0.99] overflow-hidden">
+                                        <div class="${headerClass} px-5 sm:px-6 py-4 border-b flex justify-between items-center">
+                                            <h3 class="font-bold flex items-center gap-2.5 text-base sm:text-lg"><i class="${meal.icon} ${iconClass} text-lg sm:text-xl"></i> ${meal.time}</h3>
+                                        </div>
+                                        <div class="p-5 sm:p-6">
+                                            <ul class="space-y-4 text-gray-700 mb-6">
+                                                ${meal.items.map(item => `
+                                                    <li class="flex flex-col sm:flex-row sm:items-start text-sm">
+                                                        <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(item.link)}" target="_blank" class="text-red-600 hover:text-red-800 font-bold inline-flex items-center gap-1.5 leading-snug">
+                                                            <i class="fa-brands fa-youtube text-red-500 shrink-0"></i> ${item.name}
+                                                        </a>
+                                                        <span class="text-gray-500 text-xs sm:text-sm font-medium sm:ml-2 mt-1 sm:mt-0 bg-gray-50 sm:bg-transparent px-2 py-0.5 rounded sm:p-0 border border-gray-100 sm:border-none w-max">${item.quantity}</span>
+                                                    </li>
+                                                `).join('')}
+                                            </ul>
+                                            ${meal.alternative ? `
+                                            <div class="mb-5 p-3 sm:p-4 bg-gray-50 rounded-xl border border-dashed border-gray-200">
+                                                <p class="text-[11px] sm:text-sm text-gray-600 italic leading-relaxed">
+                                                    <span class="text-red-600 font-bold not-italic text-[10px] sm:text-xs uppercase tracking-wide mr-1">Or:</span> ${meal.alternative}
+                                                </p>
+                                            </div>` : ''}
+                                            
+                                            <div class="flex flex-wrap gap-2 sm:gap-3">
+                                                <span class="bg-red-50 text-red-700 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-red-100 shadow-sm">P: ${meal.macros.p}</span>
+                                                <span class="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-blue-100 shadow-sm">C: ${meal.macros.c}</span>
+                                                <span class="bg-yellow-50 text-yellow-700 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-yellow-100 shadow-sm">F: ${meal.macros.f}</span>
+                                                <span class="bg-green-50 text-green-700 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-green-100 shadow-sm">Fib: ${meal.macros.fiber}</span>
+                                                <span class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-gray-200 shadow-sm">Kcal: ${meal.macros.kcal}</span>
+                                            </div>
+
+                                            <div class="mt-5 pt-4 border-t border-gray-100">
+                                                <p class="text-[11px] sm:text-sm text-gray-500 leading-relaxed">
+                                                    <strong class="text-gray-900 uppercase text-[9px] sm:text-[10px] tracking-wider mr-1 block sm:inline">Micronutrients:</strong> ${meal.micros}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderKeyNotes() {
+            const { client } = dietPlanData;
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 class="text-2xl md:text-4xl font-black text-gray-900 mb-6 uppercase italic tracking-tight">Important Notes</h2>
+                    
+                    <!-- Dairy Allergy Alert -->
+                    <div class="bg-red-50 p-5 md:p-8 rounded-3xl shadow-sm mb-6 border border-red-100 mx-1">
+                        <h3 class="text-lg md:text-xl font-black text-red-700 mb-3 flex items-center uppercase tracking-wide">
+                            <i class="fa-solid fa-triangle-exclamation mr-3 text-2xl"></i> Dairy Allergy
+                        </h3>
+                        <p class="text-gray-800 mb-3 font-medium text-sm md:text-base leading-relaxed">This plan is completely customized to avoid dairy. You must strictly enforce the following rules:</p>
+                        <ul class="list-disc list-inside space-y-2 text-red-900 font-bold pl-1 text-sm md:text-base">
+                            <li>NO Milk, Curd, Paneer, Whey Protein, Butter, or Ghee.</li>
+                            <li>Use <span class="text-red-600 underline decoration-red-300 underline-offset-4">Cold-Pressed Coconut Oil</span> or <span class="text-red-600 underline decoration-red-300 underline-offset-4">Peanut Oil</span> for cooking.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Recipe Links & Measuring Alert -->
+                    <div class="bg-amber-50 p-5 md:p-8 rounded-3xl shadow-sm mb-6 border border-amber-100 mx-1">
+                        <h3 class="text-lg md:text-xl font-black text-amber-800 mb-3 flex items-center uppercase tracking-wide">
+                            <i class="fa-solid fa-scale-balanced mr-3 text-2xl"></i> Recipe Links & Measuring
+                        </h3>
+                        <p class="text-gray-800 mb-3 font-medium text-sm md:text-base leading-relaxed">The recipe links provided in your plan are <strong>strictly for reference</strong> to understand the cooking method. You must NOT blindly follow the ingredient quantities shown in those videos.</p>
+                        <ul class="list-disc list-inside space-y-2 text-amber-900 font-bold pl-1 text-sm md:text-base">
+                            <li>Prep and eat according to the <strong>exact calculated grams/cups</strong> listed in your meals.</li>
+                            <li>Weigh raw ingredients to ensure you hit your macro targets perfectly.</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mx-1">
+                        <!-- Volume Eating -->
+                        <div class="bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-gray-100">
+                            <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2 flex items-center uppercase">
+                                <div class="bg-blue-50 p-2 rounded-lg mr-3"><i class="fa-solid fa-bowl-food text-blue-500 text-lg"></i></div> Volume Eating
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">Eating ~2800 calories entirely from clean, whole foods requires effort. Don't skip meals. If you feel too full, eat your protein sources first, then finish the carbs.</p>
+                        </div>
+
+                        <!-- Hydration & Training -->
+                        <div class="bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-gray-100">
+                            <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2 flex items-center uppercase">
+                                <div class="bg-purple-50 p-2 rounded-lg mr-3"><i class="fa-solid fa-droplet text-purple-600 text-lg"></i></div> Hydration
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">Because you are training 6-7 days a week and eating a high-carb diet (which pulls water into muscle cells), you must aim for <strong class="text-black">4+ Liters of water</strong> daily.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Metrics -->
+                    <div class="bg-black text-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl mt-8 mx-1 relative overflow-hidden">
+                        <i class="fa-solid fa-crosshairs absolute -right-6 -top-6 text-9xl text-white opacity-5"></i>
+                        <h3 class="text-xl md:text-2xl font-black text-white mb-6 flex items-center uppercase italic tracking-wide relative z-10">
+                            Strategy Breakdown
+                        </h3>
+                        <div class="space-y-6 relative z-10">
+                            <div class="flex items-start">
+                                <div class="bg-red-600 p-2.5 rounded-xl mr-4 mt-0.5 shadow-lg shrink-0"><i class="fa-solid fa-arrow-trend-up text-white text-sm"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-base md:text-lg mb-1">Calorie Surplus</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">~2,750 kcal/day. You are lean (BMI 20) and highly active. This surplus guarantees you have the raw material to build tissue.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white p-2.5 rounded-xl mr-4 mt-0.5 shadow-lg shrink-0"><i class="fa-solid fa-dumbbell text-black text-sm"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-base md:text-lg mb-1">Muscle Synthesis</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Protein target scales up to 160g. This is well over 2.2g per kg of your body weight, optimizing recovery from daily intense workouts.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-gray-700 p-2.5 rounded-xl mr-4 mt-0.5 shadow-lg shrink-0"><i class="fa-solid fa-weight-scale text-white text-sm"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-base md:text-lg mb-1">Weight Gain Target</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Aim for a steady climb. Don't rush the scale; focus on progressive overload in the gym.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderExplore() {
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 class="text-2xl md:text-4xl font-black text-gray-900 mb-2 uppercase italic tracking-tight">Thank you!</h2>
+                    <p class="text-gray-600 mb-8 text-sm md:text-base px-1">Your transformation journey begins now. We're thrilled to support your path to a stronger, more confident you.</p>
+
+                    <h3 class="text-sm font-black text-gray-400 mb-6 uppercase tracking-widest px-1 border-b border-gray-200 pb-2">Explore Other Programs</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 px-1">
+                        <!-- Plan 1: Diet Plan -->
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center tap-effect">
+                            <div class="bg-blue-50 p-5 rounded-2xl mb-4">
+                                <i class="fa-solid fa-utensils text-2xl md:text-3xl text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-gray-900">Diet & Nutrition</h4>
+                            <p class="text-[10px] text-gray-400 mt-1 mb-4 uppercase tracking-widest font-bold">Science-Based</p>
+                            <p class="text-sm text-gray-600 mb-6 w-full leading-relaxed">Scientifically crafted nutrition plans tailored to your metabolism and goals.</p>
+                            
+                            <a href="https://www.kn0x.fit/diet-guide" target="_blank" class="mt-auto w-full bg-gray-50 hover:bg-black text-gray-900 hover:text-white font-bold py-3.5 px-6 rounded-xl transition-colors active:scale-95 flex items-center justify-center border border-gray-200 hover:border-black">
+                                View Guide <i class="fa-solid fa-arrow-right ml-2 text-blue-400"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Plan 2: Elite Program (Special) -->
+                        <div class="bg-black p-6 rounded-3xl shadow-2xl border border-gray-800 flex flex-col items-center text-center relative overflow-hidden tap-effect sm:scale-105 z-10 my-2 sm:my-0">
+                            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-red-600 via-yellow-500 to-red-600"></div>
+                            <div class="absolute top-4 right-4 bg-red-600 text-white text-[9px] font-black px-2.5 py-1 rounded-md tracking-widest uppercase shadow-md">Elite</div>
+                            
+                            <div class="bg-gray-900 p-5 rounded-2xl mb-4 border border-gray-800 mt-2">
+                                <i class="fa-solid fa-star text-2xl md:text-3xl text-yellow-500"></i>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-black text-white italic uppercase tracking-tight">Elite Program</h4>
+                            <p class="text-[10px] text-gray-400 mt-1 mb-4 uppercase tracking-widest font-bold">Total Transformation</p>
+                            <p class="text-sm text-gray-400 mb-6 w-full leading-relaxed">The ultimate 360° approach. Daily coaching, custom diet, and advanced training.</p>
+                            
+                            <a href="https://www.kn0x.fit/elite-program" target="_blank" class="mt-auto w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-[0_4px_20px_rgba(220,38,38,0.4)] active:scale-95 flex items-center justify-center group">
+                                JOIN ELITE <i class="fa-solid fa-crown ml-2 text-yellow-300 group-hover:animate-bounce"></i>
+                            </a>
+                        </div>
+
+                        <!-- Plan 3: General Fitness -->
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center tap-effect">
+                            <div class="bg-orange-50 p-5 rounded-2xl mb-4">
+                                <i class="fa-solid fa-person-running text-2xl md:text-3xl text-orange-500"></i>
+                            </div>
+                            <h4 class="text-lg md:text-xl font-bold text-gray-900">General Fitness</h4>
+                            <p class="text-[10px] text-gray-400 mt-1 mb-4 uppercase tracking-widest font-bold">Sustainable Health</p>
+                            <p class="text-sm text-gray-600 mb-6 w-full leading-relaxed">A balanced, sustainable approach for those looking to stay healthy and active.</p>
+                            
+                            <a href="https://www.kn0x.fit/general-fitness" target="_blank" class="mt-auto w-full bg-gray-50 hover:bg-black text-gray-900 hover:text-white font-bold py-3.5 px-6 rounded-xl transition-colors active:scale-95 flex items-center justify-center border border-gray-200 hover:border-black">
+                                Start Now <i class="fa-solid fa-check ml-2 text-orange-500"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-8 bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-200 mx-1">
+                        <h4 class="text-gray-900 mb-6 font-black text-sm uppercase tracking-widest">Connect With Us</h4>
+                        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mt-4">
+                            <a href="https://wa.me/919380422603" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 text-gray-700 bg-white hover:text-green-600 transition-colors group p-3.5 rounded-xl shadow-sm border border-gray-100 hover:border-green-200 active:scale-95">
+                                <i class="fa-brands fa-whatsapp text-xl text-green-500"></i>
+                                <span class="font-bold font-mono text-sm tracking-tight">+91 9380422603</span>
+                            </a>
+                            <a href="mailto:info@kn0x.fit" class="w-full sm:w-auto flex items-center justify-center gap-3 text-gray-700 bg-white hover:text-blue-600 transition-colors group p-3.5 rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 active:scale-95">
+                                <i class="fa-solid fa-envelope text-xl text-blue-500"></i>
+                                <span class="font-bold text-sm tracking-tight">info@kn0x.fit</span>
+                            </a>
+                            <a href="https://www.instagram.com/kn0x_fit/profilecard/?igsh=bWFiMzlkanppYTh1" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 text-gray-700 bg-white hover:text-purple-600 transition-colors group p-3.5 rounded-xl shadow-sm border border-gray-100 hover:border-purple-200 active:scale-95">
+                                <i class="fa-brands fa-instagram text-xl text-purple-600"></i>
+                                <span class="font-bold text-sm tracking-tight">@KN0X.FIT</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTerms() {
+            mainContent.innerHTML = `
+                <div class="content-fade-in max-w-7xl mx-auto">
+                    <h2 class="text-2xl md:text-4xl font-black text-gray-900 mb-6 uppercase italic tracking-tight">Terms & Conditions</h2>
+                    
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 space-y-8 text-gray-700 mx-1">
+                        
+                        <div>
+                            <h3 class="text-base md:text-lg font-black text-gray-900 mb-3 flex items-center uppercase tracking-wide">
+                                <div class="bg-red-50 text-red-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3"><i class="fa-solid fa-box-open"></i></div> 
+                                1. Program Inclusions
+                            </h3>
+                            <ul class="list-none space-y-3 pl-11 text-sm md:text-base">
+                                <li class="relative before:absolute before:-left-5 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"><strong>Diet Plan:</strong> Customized weekly diet plan based on preferences & goals.</li>
+                                <li class="relative before:absolute before:-left-5 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"><strong>Workout Plan:</strong> Progressive routines tailored to fitness level.</li>
+                                <li class="relative before:absolute before:-left-5 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"><strong>Elite Program:</strong> Premium coaching with daily follow-up and weekly video calls.</li>
+                                <li class="relative before:absolute before:-left-5 before:top-2 before:w-1.5 before:h-1.5 before:bg-green-400 before:rounded-full text-gray-900"><strong class="text-green-600">Bonus:</strong> 1 extra month FREE if all Elite terms are met.</li>
+                            </ul>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
+                            <div>
+                                <h3 class="text-base md:text-lg font-black text-gray-900 mb-3 flex items-center uppercase tracking-wide">
+                                    <div class="bg-blue-50 text-blue-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3"><i class="fa-solid fa-calendar-check"></i></div> 
+                                    2. Duration
+                                </h3>
+                                <ul class="list-none space-y-2 pl-11 text-sm md:text-base">
+                                    <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">Standard plans valid for <strong>30 days</strong>.</li>
+                                    <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">Free month applies only if daily updates are submitted.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-black text-gray-900 mb-3 flex items-center uppercase tracking-wide">
+                                    <div class="bg-orange-50 text-orange-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3"><i class="fa-solid fa-ban"></i></div> 
+                                    5. Refund Policy
+                                </h3>
+                                <ul class="list-none space-y-2 pl-11 text-sm md:text-base">
+                                    <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"><strong>No Refunds</strong> after plan delivery or questionnaire submission.</li>
+                                    <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">Exceptions made only for technical errors on our side.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-5 md:p-6 rounded-2xl border border-gray-200">
+                            <h3 class="text-base md:text-lg font-black text-gray-900 mb-3 flex items-center uppercase tracking-wide">
+                                <i class="fa-solid fa-mobile-screen-button text-gray-500 mr-3"></i> 3. Daily Check-in <span class="text-xs bg-black text-white px-2 py-0.5 rounded ml-2 tracking-normal">Elite Only</span>
+                            </h3>
+                            <ul class="list-none space-y-2 pl-7 text-sm md:text-base">
+                                <li class="relative before:absolute before:-left-4 before:top-2 before:w-1 before:h-1 before:bg-gray-400 before:rounded-full"><strong>Visuals:</strong> Meal Photos & Workout Summary required.</li>
+                                <li class="relative before:absolute before:-left-4 before:top-2 before:w-1 before:h-1 before:bg-gray-400 before:rounded-full"><strong>Timing:</strong> Submit once every 24 hours (before 11 PM).</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-red-50 p-5 md:p-6 rounded-2xl border border-red-100">
+                            <h3 class="text-base md:text-lg font-black text-red-800 mb-2 flex items-center uppercase tracking-wide">
+                                <i class="fa-solid fa-gavel text-red-600 mr-3"></i> 4. 3-Strike Policy <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded ml-2 tracking-normal">Elite Only</span>
+                            </h3>
+                            <p class="text-sm text-red-800 mb-3 font-medium">To qualify for the FREE Elite month bonus:</p>
+                            <ul class="list-none space-y-2 pl-7 text-sm text-red-900 font-bold">
+                                <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-red-400 before:rounded-full">Max <strong>3 missed updates</strong> allowed.</li>
+                                <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-red-400 before:rounded-full">Missing the <strong>4th day</strong> revokes bonus eligibility.</li>
+                                <li class="relative before:absolute before:-left-4 before:top-2 before:w-1.5 before:h-1.5 before:bg-red-400 before:rounded-full opacity-70">No warnings sent; tracked automatically.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-6 border-t border-gray-100">
+                            <h3 class="text-sm font-black text-gray-400 mb-2 uppercase tracking-widest">
+                                10. Results Disclaimer
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Results vary based on individual commitment, consistency, and metabolic factors.</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 text-gray-300 p-5 md:p-6 rounded-2xl mt-4">
+                            <h3 class="text-xs md:text-sm font-black text-white mb-2 flex items-center uppercase tracking-widest">
+                                <i class="fa-solid fa-circle-info text-gray-500 mr-2"></i> Medical Disclaimer
+                            </h3>
+                            <p class="text-[10px] md:text-xs leading-relaxed">
+                                By using this plan, you acknowledge that <a href="https://www.kn0x.fit/" target="_blank" class="text-white hover:underline font-bold transition-colors">KN0X.FIT</a> coaches are not medical professionals, but the plans are carefully designed and provided by highly experienced, certified fitness coaches who have successfully guided numerous clients through similar body transformations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        mainContent.addEventListener('click', (e) => {
+            const header = e.target.closest('.collapsible-header');
+            if (header) {
+                const content = header.nextElementSibling;
+                header.classList.toggle('expanded');
+                content.classList.toggle('expanded');
+            }
+        });
+
+        // Combined Navigation Logic for Sidebar and Mobile Top Bar
+        function handleNavigation(e) {
+            // Prevent default if it's an anchor tag with href="#"
+            if(e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+
+            const target = e.target.closest('[data-view]');
+            if (!target) return;
+
+            const view = target.dataset.view;
+            if (view) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                if (view === 'dashboard') {
+                    renderDashboard();
+                } else if (view === 'workout') {
+                    renderWorkout();
+                } else if (view === 'explore') {
+                    renderExplore();
+                } else if (view === 'keyNotes') {
+                    renderKeyNotes();
+                } else if (view === 'terms') {
+                    renderTerms();
+                } else if (view.startsWith('week')) {
+                    renderWeek(view);
+                }
+                
+                setActiveLink(view);
+                closeMobileMenu();
+                
+                // Scroll active mobile tab into view perfectly centered
+                const activeMobileTab = document.querySelector(`.mobile-tab[data-view="${view}"]`);
+                if(activeMobileTab && mobileNavStrip) {
+                    activeMobileTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            }
+        }
+
+        // Attach listeners
+        navigation.addEventListener('click', handleNavigation);
+        mobileNavStrip.addEventListener('click', handleNavigation);
+
+        // Mobile Menu Toggling
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.remove('-translate-x-full');
+            sidebar.classList.add('translate-x-0'); 
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+
+        const closeMobileMenu = () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.remove('translate-x-0'); 
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        overlay.addEventListener('click', closeMobileMenu);
+        sidebarClose.addEventListener('click', closeMobileMenu);
+
+        function setActiveLink(view) {
+            // Sidebar links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeSidebarLink = document.querySelector(`.nav-link[data-view="${view}"]`);
+            if (activeSidebarLink) {
+                activeSidebarLink.classList.add('active');
+            }
+
+            // Mobile Tab links
+            document.querySelectorAll('.mobile-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const activeMobileTab = document.querySelector(`.mobile-tab[data-view="${view}"]`);
+            if (activeMobileTab) {
+                activeMobileTab.classList.add('active');
+            }
+        }
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            setActiveLink('dashboard');
+            renderDashboard();
+        });
+
+    </script>
+</body>
+</html>
