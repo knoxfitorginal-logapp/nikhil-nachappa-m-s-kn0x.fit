@@ -107,7 +107,7 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
             <a href="https://www.kn0x.fit/" target="_blank" class="flex items-center py-1">
-                <img src="./src/assets/final_logo-removebg-preview (1).png" alt="KN0X.FIT Logo" class="h-14 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="./src/assets/final_logo-removebg-preview (1).png" alt="KN0X.FIT Logo" class="h-20 md:h-24 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="hidden text-xl font-black text-gray-900 italic tracking-tighter uppercase"><span class="text-red-600">KN0X</span>.FIT</div>
             </a>
             <div class="w-10"></div> <!-- Spacer for centering -->
@@ -185,7 +185,7 @@
             <!-- Version info -->
             <div class="p-4 text-center text-xs text-gray-400 border-t border-gray-200">
                 <p class="font-bold text-gray-500 uppercase tracking-wider mb-1 text-[10px]">Built For Change - Designed For U</p>
-                v2.0.0 Mobile UX Optimized
+                v2.0.1 UI Cleaned
             </div>
         </aside>
 
@@ -557,7 +557,7 @@
                 icon: "fa-solid fa-person-walking",
                 exercises: [
                     { name: "Romanian Deadlifts (RDLs)", sets: "4", reps: "8-10", muscle: "Hamstrings" },
-                    { name: "Leg Press (High Feet)", sets: "3", reps: "10-12", muscle: "Glutes/Hams" },
+                    { name: "Leg Press (High Feet)", sets: "3", reps: "10-12", muscle: "Hamstrings & Glutes" },
                     { name: "Walking Lunges", sets: "3", reps: "10-12 /leg", muscle: "Quads & Glutes" },
                     { name: "Seated Leg Curls", sets: "3", reps: "10-12", muscle: "Hamstrings" },
                     { name: "Seated Calf Raises", sets: "4", reps: "15-20", muscle: "Calves" },
@@ -851,7 +851,7 @@
                     </div>
                 `;
             } else {
-                // Mobile Optimized App-Style Card Layout
+                // Mobile Optimized App-Style Card Layout (Removed YouTube logo)
                 contentHtml = `
                     <div class="mt-4 content-fade-in">
                         <div class="${activeDayData.bgClass} px-5 py-4 rounded-t-3xl border-x border-t ${activeDayData.borderClass} flex flex-col md:flex-row md:items-center justify-between gap-3 mx-1">
@@ -871,7 +871,6 @@
                                     <div class="bg-gray-50 hover:bg-red-50/40 transition-colors border border-gray-200 hover:border-red-200 rounded-2xl p-4 sm:p-5 active:scale-[0.99] group flex flex-col gap-3 sm:gap-4">
                                         <div class="flex justify-between items-start gap-2">
                                             <a href="https://www.youtube.com/results?search_query=How+to+do+${encodeURIComponent(ex.name)}+perfect+form" target="_blank" class="text-sm sm:text-base md:text-lg font-black text-gray-900 flex items-start gap-2 hover:text-red-600 transition-colors leading-snug">
-                                                <i class="fa-brands fa-youtube text-red-500 mt-0.5 text-lg sm:text-xl shrink-0 group-hover:scale-110 transition-transform"></i> 
                                                 <span>${ex.name}</span>
                                             </a>
                                             <span class="bg-white border border-gray-200 text-gray-600 px-2 py-1 rounded text-[9px] sm:text-[10px] font-bold uppercase tracking-wider shadow-sm shrink-0 text-right max-w-[40%] sm:max-w-none leading-tight">${ex.muscle}</span>
@@ -919,7 +918,7 @@
                     </div>
 
                     <!-- Daily Navigation Tabs -->
-                    <div class="flex overflow-x-auto gap-3 pb-4 pt-2 no-scrollbar items-center border-b-2 border-gray-100 snap-x snap-mandatory mx-1">
+                    <div class="flex overflow-x-auto gap-3 pb-4 pt-2 no-scrollbar items-center border-b-2 border-gray-200 snap-x snap-mandatory mx-1">
                         ${tabsHtml}
                     </div>
 
@@ -931,7 +930,7 @@
                         <div class="absolute -bottom-10 -right-10 opacity-[0.03]">
                             <i class="fa-solid fa-dumbbell text-9xl"></i>
                         </div>
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-white mb-6 md:mb-8 flex items-center uppercase italic tracking-wide">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-white mb-6 md:mb-8 flex items-center uppercase italic tracking-wide relative z-10">
                             <i class="fa-solid fa-crown text-yellow-500 mr-3 md:mr-4 text-2xl md:text-3xl"></i> Golden Rules
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 relative z-10">
@@ -1049,7 +1048,7 @@
                                                 ${meal.items.map(item => `
                                                     <li class="flex flex-col sm:flex-row sm:items-start text-sm">
                                                         <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(item.link)}" target="_blank" class="text-red-600 hover:text-red-800 font-bold inline-flex items-center gap-1.5 leading-snug">
-                                                            <i class="fa-brands fa-youtube text-red-500 shrink-0"></i> ${item.name}
+                                                            ${item.name}
                                                         </a>
                                                         <span class="text-gray-500 text-xs sm:text-sm font-medium sm:ml-2 mt-1 sm:mt-0 bg-gray-50 sm:bg-transparent px-2 py-0.5 rounded sm:p-0 border border-gray-100 sm:border-none w-max">${item.quantity}</span>
                                                     </li>
